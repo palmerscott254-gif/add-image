@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Newton Gakuya | Portfolio</title>  
+
+  <!-- SEO & Social Sharing -->  
+  <meta name="description" content="Newton Gakuya - Commerce student, programmer, poet, rugby player. Explore my portfolio of projects, poetry, and books.">  
+  <meta name="keywords" content="Newton Gakuya, portfolio, commerce student, programmer, poet, rugby, books">  
+  <meta property="og:title" content="Newton Gakuya | Portfolio">  
+  <meta property="og:description" content="Student, programmer, poet, and creator. Explore my journey and works.">  
+  <meta property="og:image" content="profilep.jpg">  
+  <meta property="og:type" content="website">  
+
+  <style>  
+    /* Global Styles */  
+    body {  
+      margin: 0;  
+      padding: 0;  
+      font-family: Arial, sans-serif;  
+      color: white;  
+      background: url("https://i.pinimg.com/1200x/4d/68/92/4d689241f1a2a31bb0869a012a647c50.jpg") no-repeat center center fixed;  
+      background-size: cover;  
+      scroll-behavior: smooth;  
+    }  
+
+    a { color: #00ffff; text-decoration: none; }  
+
+    /* Navbar */  
+    nav {  
+      position: fixed;  
+      top: 0;  
+      width: 100%;  
+      background: rgba(0, 0, 0, 0.85);  
+      display: flex;  
+      justify-content: center;  
+      gap: 20px;  
+      padding: 15px;  
+      z-index: 1000;  
+      backdrop-filter: blur(8px);  
+    }  
+
+    nav a {  
+      color: #00ffff;  
+      font-weight: bold;  
+      transition: color 0.3s, border-bottom 0.3s;  
+    }  
+
+    nav a:hover { color: #00cccc; }  
+
+    nav a.active {  
+      color: #fff;  
+      border-bottom: 2px solid #00ffff;  
+      padding-bottom: 3px;  
+    }  
+
+    /* Hero Section */  
+    .hero {  
+      height: 100vh;  
+      display: flex;  
+      flex-direction: column;  
+      justify-content: center;  
+      align-items: center;  
+      text-align: center;  
+      position: relative;  
+    }  
+
+    .hero::before {  
+      content: "";  
+      position: absolute;  
+      top: 0; left: 0;  
+      width: 100%; height: 100%;  
+      background: rgba(0, 0, 0, 0.6);  
+      z-index: 0;  
+    }  
+
+    .hero * { position: relative; z-index: 1; }  
+
+    .hero h1 {  
+      font-size: 3.5rem;  
+      color: #00ffff;  
+      text-shadow: 0 0 15px #00ffff;  
+      animation: fadeInDown 1s ease;  
+    }  
+
+    .hero p {  
+      font-size: 1.5rem;  
+      margin-top: 15px;  
+      animation: fadeInUp 1.5s ease;  
+    }  
+
+    .profile-pic {  
+      margin-top: 20px;  
+      width: 180px;  
+      height: 180px;  
+      border-radius: 50%;  
+      border: 4px solid #00ffff;  
+      box-shadow: 0px 0px 25px #00ffff;  
+      animation: fadeIn 2s ease;  
+    }  
+
+    /* Section styles */  
+    section {  
+      padding: 80px 20px;  
+      background: rgba(0, 0, 0, 0.75);  
+      margin: 20px auto;  
+      border-radius: 12px;  
+      max-width: 900px;  
+      animation: fadeInUp 1s ease;  
+    }  
+
+    h2 {  
+      font-size: 2rem;  
+      color: #00ffff;  
+      margin-bottom: 20px;  
+      text-align: center;  
+      text-shadow: 0 0 10px #00ffff;  
+    }  
+
+    p, ul li {  
+      font-size: 1.1rem;  
+      line-height: 1.6;  
+      text-align: center;  
+    }  
+
+    ul { list-style: none; padding: 0; }  
+    ul li { margin: 10px 0; }  
+
+    /* Poetry & Books Gallery */  
+    .gallery {  
+      display: grid;  
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));  
+      gap: 30px;  
+      justify-items: center;  
+      margin-top: 30px;  
+    }  
+
+    .book { text-align: center; cursor: pointer; }  
+
+    .book img {  
+      max-width: 180px;  
+      border-radius: 12px;  
+      box-shadow: 0 0 15px #00ffff;  
+      transition: transform 0.4s ease, box-shadow 0.4s ease;  
+    }  
+
+    .book img:hover {  
+      transform: scale(1.08);  
+      box-shadow: 0 0 30px #00cccc;  
+    }  
+
+    .book-title {  
+      margin-top: 10px;  
+      font-size: 1rem;  
+      color: #00ffff;  
+      text-shadow: 0 0 10px #00ffff;  
+    }  
+
+    /* Lightbox */  
+    .lightbox {  
+      display: none;  
+      position: fixed;  
+      z-index: 999;  
+      top: 0; left: 0;  
+      width: 100%; height: 100%;  
+      background: rgba(0, 0, 0, 0.9);  
+      justify-content: center;  
+      align-items: center;  
+      flex-direction: column;  
+      opacity: 0;  
+      transition: opacity 0.4s ease;  
+    }  
+
+    .lightbox.show {  
+      display: flex;  
+      opacity: 1;  
+    }  
+
+    .lightbox-content {  
+      text-align: center;  
+      animation: zoomIn 0.4s ease;  
+    }  
+
+    .lightbox img {  
+      max-width: 95%;  
+      max-height: 95%;  
+      border-radius: 12px;  
+      box-shadow: 0 0 35px #00ffff;  
+      transition: transform 0.3s ease;  
+      cursor: zoom-in;  
+    }  
+
+    .lightbox img.zoomed {  
+      transform: scale(1.8);  
+      cursor: zoom-out;  
+    }  
+
+    .lightbox-caption {  
+      margin-top: 15px;  
+      font-size: 1.2rem;  
+      color: #00ffff;  
+      text-shadow: 0 0 15px #00cccc;  
+    }  
+
+    .close, .prev, .next {  
+      position: absolute;  
+      font-size: 2.2rem;  
+      color: #00ffff;  
+      cursor: pointer;  
+      text-shadow: 0 0 15px #00cccc;  
+      user-select: none;  
+      transition: transform 0.2s;  
+    }  
+
+    .close:hover, .prev:hover, .next:hover {  
+      transform: scale(1.2);  
+      color: #00cccc;  
+    }  
+
+    .close { top: 20px; right: 30px; }  
+    .prev { left: 30px; top: 50%; transform: translateY(-50%); }  
+    .next { right: 30px; top: 50%; transform: translateY(-50%); }  
+
+    /* Contact Form */  
+    .sr-only {  
+      position: absolute;  
+      left: -9999px;  
+      width: 1px;  
+      height: 1px;  
+      overflow: hidden;  
+    }  
+
+    form input, form textarea, form button {  
+      width: 90%;  
+      max-width: 500px;  
+      margin: 10px auto;  
+      padding: 12px;  
+      border-radius: 8px;  
+      border: none;  
+      outline: none;  
+      display: block;  
+      font-size: 1rem;  
+    }  
+
+    form input, form textarea {  
+      background: rgba(255, 255, 255, 0.1);  
+      color: white;  
+    }  
+
+    form button {  
+      background: #00ffff;  
+      color: black;  
+      font-weight: bold;  
+      cursor: pointer;  
+      transition: all 0.3s;  
+    }  
+
+    form button:hover {  
+      background: #00cccc;  
+      transform: scale(1.05);  
+    }  
+
+    /* Animations */  
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }  
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }  
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }  
+    @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }  
+
+    /* Footer */  
+    footer {  
+      text-align: center;  
+      padding: 20px;  
+      margin-top: 40px;  
+      color: #aaa;  
+      font-size: 0.9rem;  
+    }  
+
+    footer a { margin: 0 10px; color: #00ffff; }  
+
+    /* Responsive */  
+    @media (max-width: 600px) {  
+      .hero h1 { font-size: 2.2rem; }  
+      .hero p { font-size: 1.2rem; }  
+      .profile-pic { width: 140px; height: 140px; }  
+      section { padding: 50px 15px; }  
+    }  
+
+    @media (max-width: 400px) {  
+      .book img { max-width: 140px; }  
+    }  
+  </style>  
+</head>  
+
+<body>  
+  <!-- Navbar -->  
+  <nav aria-label="Main Navigation">  
+    <a href="#about">About</a>  
+    <a href="#skills">Skills</a>  
+    <a href="#projects">Projects</a>  
+    <a href="#poetry-books">Books</a>  
+    <a href="#poetry">Poetry</a>  
+    <a href="#hobbies">Hobbies</a>  
+    <a href="#contact">Contact</a>  
+  </nav>  
+
+  <!-- Hero Section -->  
+  <section class="hero" id="home">  
+    <h1>Hello, it’s me, Newton Gakuya</h1>  
+    <p>A Commerce Student | Programmer | Graphic Designer | Writer | Rugby Player | Leader</p>  
+    <img src="profilep.jpg" alt="Newton Gakuya smiling portrait" class="profile-pic">  
+  </section>  
+
+  <!-- About Me -->  
+  <section id="about">  
+    <h2>About Me</h2>  
+    <p>  
+      I’m a Bachelor of Commerce student at Dedan Kimathi University of Technology,  
+      where I am building a strong foundation in business, finance, and management.  
+      My studies have equipped me with analytical, problem-solving, and teamwork skills that I apply in both academic projects and practical experiences.  
+      <br><br>  
+      I am particularly interested in accounting and finance, and passionate about leveraging my knowledge to create innovative solutions and contribute positively to organizations.  
+      <br><br>  
+      Outside academics, I learn programming and web development, focusing on Python, Django, HTML, and CSS.  
+      I enjoy creating small applications and websites, which helps me enhance my technical skills and creativity.  
+      I’m also a creative poet who loves expressing emotions through words.  
+    </p>  
+  </section>  
+
+  <!-- Skills -->  
+  <section id="skills">  
+    <h2>Skills</h2>  
+    <p><strong>Programming:</strong> Python, Django, HTML, CSS</p>  
+    <p><strong>Soft Skills:</strong> Creativity, Teamwork (from rugby), Strategy (from chess), Communication</p>  
+  </section>  
+
+  <!-- Projects -->  
+  <section id="projects">  
+    <h2>Projects</h2>  
+    <p>Some of my work includes:</p>  
+    <ul>  
+      <li>Small Django apps (firewalls and databases)</li>  
+      <li>Python scripts and machine learning projects</li>  
+      <li>HTML/CSS website designs (frontends and login pages)</li>  
+      <li>Published Poems and Books (see gallery below)</li>  
+    </ul>  
+  </section>  
+
+  <!-- Poetry & Books Gallery -->  
+  <section id="poetry-books">  
+    <h2>Poetry & Books Gallery</h2>  
+    <div class="gallery">  
+      <div class="book" onclick="openLightbox(0)">  
+        <img src="ojwang.jpg" alt="Cover of The Walls Did It">  
+        <div class="book-title">The Walls Did It</div>  
+      </div>  
+      <div class="book" onclick="openLightbox(1)">  
+        <img src="man.jpg" alt="Cover of Don’t Man Up, Speak Up">  
+        <div class="book-title">Don’t Man Up, Speak Up</div>  
+      </div>  
+      <div class="book" onclick="openLightbox(2)">  
+        <img src="her.jpg" alt="Cover of The Girl with Glasses">  
+        <div class="book-title">The Girl with Glasses</div>  
+      </div>  
+      <div class="book" onclick="openLightbox(3)">  
+        <img src="coverr page.jpg" alt="Cover of Upcoming Book">  
+        <div class="book-title">Upcoming Book</div>  
+      </div>  
+    </div>  
+  </section>  
+
+  <!-- Lightbox -->  
+  <div id="lightbox" class="lightbox" role="dialog" aria-label="Book preview">  
+    <span class="close" onclick="closeLightbox()" aria-label="Close">&times;</span>  
+    <span class="prev" onclick="changeSlide(-1)" aria-label="Previous">&#10094;</span>  
+    <div class="lightbox-content">  
+      <img id="lightbox-img" src="" alt="Book cover">  
+      <div id="lightbox-caption" class="lightbox-caption"></div>  
+    </div>  
+    <span class="next" onclick="changeSlide(1)" aria-label="Next">&#10095;</span>  
+  </div>  
+
+  <!-- Poetry Corner -->  
+  <section id="poetry">  
+    <h2>Poetry Corner</h2>  
+    <p><em>"One last time"</em></p>  
+    <p><em>"Love story."</em></p>  
+    <p><em>"The mask I wear."</em></p>  
+  </section>  
+
+  <!-- Hobbies & Interests -->  
+  <section id="hobbies">  
+    <h2>Hobbies & Interests</h2>  
+    <ul>  
+      <li>🏉 Rugby - building teamwork & discipline</li>  
+      <li>♟ Chess - sharpening strategy & focus</li>  
+      <li>🎮 PES - gaming for fun & relaxation</li>  
+    </ul>  
+  </section>  
+
+  <!-- Contact -->  
+  <section id="contact">  
+    <h2>Contact Me</h2>  
+    <form action="https://formspree.io/f/yourFormID" method="POST">  
+      <label for="name" class="sr-only">Name</label>  
+      <input id="name" type="text" name="name" placeholder="Your Name" required>  
+
+      <label for="email" class="sr-only">Email</label>  
+      <input id="email" type="email" name="email" placeholder="Your Email" required>  
+
+      <label for="message" class="sr-only">Message</label>  
+      <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>  
+
+      <button type="submit">Send</button>  
+    </form>  
+    <p>📧 Email: <a href="mailto:newton.gakuya24@students.dkut.ac.ke">newton.gakuya24@students.dkut.ac.ke</a></p>  
+    <p>🐙 GitHub: <a href="https://github.com/palmerscott-gif" target="_blank">github.com/palmerscott-gif</a></p>  
+    <p>💬 Phone: <a href="tel:+254706271001">+254 706 271001</a></p>  
+  </section>  
+
+  <!-- Footer -->  
+  <footer>  
+    <p>© 2025 Newton Gakuya | Built with ❤ powered by ☕</p>  
+    <div>  
+      <a href="https://github.com/palmerscott-gif" target="_blank">GitHub</a> |  
+      <a href="mailto:newton.gakuya24@students.dkut.ac.ke">Email</a> |  
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a>  
+    </div>  
+ 
